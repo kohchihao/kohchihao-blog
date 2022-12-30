@@ -6,13 +6,13 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'My Site',
+  title: 'Marcus Koh',
   tagline: 'Dinosaurs are cool',
-  url: 'https://your-docusaurus-test-site.com',
+  url: 'https://kohchihao.com',
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
-  favicon: 'img/favicon.ico',
+  favicon: 'https://github.com/kohchihao.png',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
@@ -57,10 +57,10 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       navbar: {
-        title: 'My Site',
+        title: 'Marcus Koh',
         logo: {
-          alt: 'My Site Logo',
-          src: 'img/logo.svg',
+          alt: 'Marcus Koh Logo',
+          src: 'https://github.com/kohchihao.png',
         },
         items: [
           {
@@ -69,10 +69,20 @@ const config = {
             position: 'left',
             label: 'Tutorial',
           },
-          {to: '/blog', label: 'Blog', position: 'left'},
+          { to: '/blog', label: 'Blog', position: 'left' },
           {
-            href: 'https://github.com/facebook/docusaurus',
+            href: 'https://github.com/kohchihao',
             label: 'GitHub',
+            position: 'right',
+          },
+          {
+            href: 'https://www.linkedin.com/in/kohchihao/',
+            label: 'LinkedIn',
+            position: 'right',
+          },
+          {
+            href: 'https://medium.com/@kohchihao',
+            label: 'Medium',
             position: 'right',
           },
         ],
@@ -90,23 +100,6 @@ const config = {
             ],
           },
           {
-            title: 'Community',
-            items: [
-              {
-                label: 'Stack Overflow',
-                href: 'https://stackoverflow.com/questions/tagged/docusaurus',
-              },
-              {
-                label: 'Discord',
-                href: 'https://discordapp.com/invite/docusaurus',
-              },
-              {
-                label: 'Twitter',
-                href: 'https://twitter.com/docusaurus',
-              },
-            ],
-          },
-          {
             title: 'More',
             items: [
               {
@@ -114,13 +107,24 @@ const config = {
                 to: '/blog',
               },
               {
+                href: 'https://github.com/kohchihao',
                 label: 'GitHub',
-                href: 'https://github.com/facebook/docusaurus',
+                position: 'right',
+              },
+              {
+                href: 'https://www.linkedin.com/in/kohchihao/',
+                label: 'LinkedIn',
+                position: 'right',
+              },
+              {
+                href: 'https://medium.com/@kohchihao',
+                label: 'Medium',
+                position: 'right',
               },
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+        copyright: `Copyright © ${new Date().getFullYear()} Marcus Koh, Inc. Built with Docusaurus.`,
       },
       prism: {
         theme: lightCodeTheme,
