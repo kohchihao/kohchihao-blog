@@ -66,7 +66,7 @@ const config = {
             type: 'doc',
             docId: 'intro',
             position: 'left',
-            label: 'Tutorial',
+            label: 'Projects',
           },
           {
             href: 'https://github.com/kohchihao',
@@ -89,11 +89,15 @@ const config = {
         style: 'dark',
         links: [
           {
-            title: 'Docs',
+            title: 'Projects',
             items: [
               {
-                label: 'Tutorial',
-                to: '/docs/intro',
+                label: 'Introduction',
+                to: '/projects/intro',
+              },
+              {
+                label: 'GiftForGood',
+                to: '/projects/archive-projects/giftforgood',
               },
             ],
           },
@@ -102,7 +106,7 @@ const config = {
             items: [
               {
                 label: 'Blog',
-                to: '/blog',
+                to: '/',
               },
               {
                 href: 'https://github.com/kohchihao',
