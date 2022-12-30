@@ -7,7 +7,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'Marcus Koh',
-  tagline: 'Dinosaurs are cool',
+  tagline: 'React Native ⚛️ / Lithops 🍑 / Cactus 🌵',
   url: 'https://kohchihao.com',
   baseUrl: '/',
   onBrokenLinks: 'throw',
@@ -63,6 +63,11 @@ const config = {
           src: 'https://github.com/kohchihao.png',
         },
         items: [
+          {
+            to: '/about',
+            position: 'left',
+            label: 'About',
+          },
           {
             type: 'doc',
             docId: 'intro',

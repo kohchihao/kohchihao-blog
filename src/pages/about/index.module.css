@@ -21,3 +21,16 @@
   align-items: center;
   justify-content: center;
 }
+
+.profileImage {
+  border-radius: 500px;
+  height: 200px;
+  width: 200px;
+}
+
+.features {
+  display: flex;
+  align-items: center;
+  padding: 2rem 0;
+  width: 100%;
+}
