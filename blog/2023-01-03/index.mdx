@@ -1,0 +1,121 @@
+---
+slug: enums-vs-as-consts
+title: enums VS as consts
+authors: [marcus]
+tags: [typescript]
+---
+
+I personally have not used `enums` much in my professional experience because I find them difficult to understand and I can't clearly visualise their data structure during development of mobile apps.
+
+Recently, I have stumbled upon this particular youtube video that has piqued my interest in understanding `enums` vs `as consts` in `Typescript`.
+
+<iframe
+  width="560"
+  height="315"
+  src="https://www.youtube-nocookie.com/embed/jjMbPt_H3RQ"
+  title="YouTube video player"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowfullscreen
+></iframe>
+
+<!--truncate-->
+
+## Enums
+
+I have decided to generate some examples based on my past experience.
+
+Let's assume you have an `enum` called `Branches`, it stores a mapping between the semantic name to their actual id.
+
+```
+enum Branches  {
+    MAIN = 1000,
+    WOODLANDS = 1001,
+    ADMIRALTY = 1002,
+    SEMBAWANG = 1003,
+}
+```
+
+When typescript compiles it, it becomes:
+
+```
+var BranchesEnum;
+(function (BranchesEnum) {
+    BranchesEnum[BranchesEnum["MAIN"] = 1000] = "MAIN";
+    BranchesEnum[BranchesEnum["WOODLANDS"] = 1001] = "WOODLANDS";
+    BranchesEnum[BranchesEnum["ADMIRALTY"] = 1002] = "ADMIRALTY";
+    BranchesEnum[BranchesEnum["SEMBAWANG"] = 1003] = "SEMBAWANG";
+})(BranchesEnum || (BranchesEnum = {}));
+```
+
+This is really hard to read right? In reality, this is how it looks like:
+
+```
+const Branches = {
+    MAIN: 1000,
+    1000: 'MAIN',
+    WOODLANDS: 1001,
+    1001: 'WOODLANDS',
+    ADMIRALTY: 1002,
+    1002: 'ADMIRALTY',
+    SEMBAWANG: 1003,
+    1003: 'SEMBAWANG',
+}
+```
+
+It has a 2-way mapping between the key-value and value-key.
+
+Let's say you have a function to "open the branch"
+
+```
+function openBranchEnum(branch: BranchesEnum) {
+    console.log(branch);
+}
+```
+
+Then the only way you can open this branch is via
+
+```
+openBranchEnum(BranchesEnum.MAIN);
+```
+
+Let's say to open a branch, you have to call an api to know the branch code, then that becomes abit more complicated.
+
+```
+const { response } = await api();
+const branchCode = response.data.branchCode; // 1000
+
+// key is of type "MAIN" | "WOODLANDS" | "ADMIRALTY" | "SEMBAWANG"
+let key = BranchesEnum[1000] as keyof typeof BranchesEnum; // key = MAIN
+openBranchEnum(BranchesEnum[key]);
+```
+
+This is quite annoying and troublesome because you still have to find the key and make sure to type-cast it properly or else, `key` will be of type `string`.
+
+## as const
+
+Following the same example as above:
+
+```
+const BRANCHES = {
+    MAIN: 1000,
+    WOODLANDS: 1001,
+    ADMIRALTY: 1002,
+    SEMBAWANG: 1003,
+} as const
+
+type ValueOf<T> = T[keyof T];
+
+type Branches = ValueOf<typeof BRANCHES>;
+
+function openBranches (branch: Branches) {
+  console.log(branch);
+}
+
+const { response } = await api();
+const branchCode = response.data.branchCode; // 1000
+
+openBranches(1000);
+```
+
+Using `as const` is so much easier on the mental load and you do not need to worry about any conversion between types.

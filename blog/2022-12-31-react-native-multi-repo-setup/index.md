@@ -1,6 +1,6 @@
 ---
 slug: react-native-multi-repo-setup
-title: React Native Mutli Repo setup
+title: React Native Multi Repo setup
 authors: [marcus]
 tags: [react-native, mini-apps, multi-repo]
 ---
