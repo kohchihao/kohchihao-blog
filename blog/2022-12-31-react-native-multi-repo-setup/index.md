@@ -142,9 +142,13 @@ To resolve this issue, there is a package created by Microsoft RN team to resolv
 ```javascript title="Host App - metro.config.js"
 
 const watchFolders = [
-  path.resolve(__dirname, 'node_modules/feature-one'),
-  path.resolve(__dirname, 'node_modules/feature-two'),
+  "your feature-one full absolute path"
 ];
+
+const extraNodeModules = {
+  "@react-navigation/stack": path.resolve(__dirname, "node_modules/@react-navigation/stack"),
+  ...other libraries that requires native changes, can add here too 
+};
 
 // `makeMetroConfig helps to ensure there is only 1 copy of "react" and "react-native".
 module.exports = makeMetroConfig({
@@ -160,6 +164,7 @@ module.exports = makeMetroConfig({
   resolver: {
     // This MetroSymlinksResolver works for normal symlink via "ln -s". yarn/npm links doesnt work.
     resolveRequest: MetroSymlinksResolver(),
+    extraNodeModules,
   },
   watchFolders,
 });
@@ -172,9 +177,17 @@ So you can imagine the workflow for Soln 2.2 is like,
 3. cd ..
 4. cd `feature-one` 
 5. yarn install
-   1. After running yarn install, we need to symlink our `feature-one` to the host app `node_modules`
-   2. `ln -sf $(pwd) host-app/node_modules/`
-   3. This will create a symlinked folder -> `host-app/node_modules/feature-one`
+6. After running yarn install, we need to symlink our `feature-one` to the host app `node_modules`
+   1. `ln -sf $(pwd) host-app/node_modules/`
+   2. This assumes that your mini-app folder has the same name as your `package.json` name.
+      1. If it is different, then you have to symlink the mini-app `package.json` name to the host's `node_modules` 
+7. This will create a symlinked folder -> `host-app/node_modules/feature-one`
+
+
+:::tip
+Symlinking can be tricky because the target path if it already exists, you **cannot overwrite** the actual folder. You have to **delete** that actual folder first and proceed with the symlinking. 
+:::
+   
 
 You can see that in Soln 2.2, the `metro.config.js` is simpler and we do not need to declare `extraNodeModules` anymore. 
 
