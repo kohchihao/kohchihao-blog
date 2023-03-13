@@ -1,0 +1,56 @@
+---
+slug: custom-hooks-for-use-state-reducer
+title: Custom hooks for useState / useReducer
+authors: [marcus]
+tags: [typescript, code-snippets]
+---
+
+## Problem
+
+There are times where you want to create your own custom hooks to be shared within your teammates or across projects. Usually there are 2 ways to write your custom hook.
+You either return an object or a tuple.
+
+1. Returning as an object
+
+```
+const useFirstName = () => {
+  const [firstName, setFirstName] = useState("");
+
+  return {
+    firstName,
+    setFirstName
+  }
+}
+
+```
+
+Considering if you are returning as an object, you do not need to type it already because the object is inferred.
+
+2. Returning as an array
+
+```
+const useFirstName = () => {
+  const [firstName, setFirstName] = useState("");
+
+  return [firstName,setFirstName]
+}
+```
+
+There will be some typescript issue with this because the array now becomes type of `const useFirstName: () => (string | React.Dispatch<React.SetStateAction<string>>)[]
+`.
+
+So when you attempt to use the hook, you will realise that the type is `string | React.Dispatch<React.SetStateAction<string>>`, which isn't what you want.
+
+## Solution
+
+`as const` to the rescue again!
+
+```
+const useFirstName = () => {
+  const [firstName, setFirstName] = useState("");
+
+  return [firstName,setFirstName] as const
+}
+```
+
+This will return the correct type for your `useFirstName` where specifically item 0 (your firstName) is of type `string` and item 1 will be your setter function.
