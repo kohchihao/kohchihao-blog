@@ -4,7 +4,7 @@ tags: [hooks]
 ---
 
 
-# useDeboucne 
+# useDebounce 
 When you want to do a search, but you only want to get the delayed string instead of immediately.
 
 ```typescript

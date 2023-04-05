@@ -1,0 +1,54 @@
+---
+slug: naming-your-react-functions
+title: Naming your react functions
+authors: [marcus]
+tags: [react, coding-convention]
+---
+
+## Problem
+
+Recently, I faced a dilemma when naming my react functions. I saw my colleagues named some functions as
+
+```
+onClickDate
+onClickStartTime
+onClickxxxx
+```
+
+To me previously, this was not acceptable because, I was thinking that when the user performed a certain action, then we trigger the function.
+So I would name it as
+
+```
+onDateClicked
+onStartTimeClicked
+onXXXClicked
+```
+
+However, when I surveyed around with other senior engineers and did some googling, I realised that my idea of "correct" function names
+has been wrong all these while. There should not be any `past tense` in your function names!
+
+## Solution
+
+Naming your functions in `present tense`. For eg:
+
+```
+onSelectDate
+onSelectXXX
+
+onSubmit
+onConfirm
+
+onChangeXXXX
+onPressXXXX
+
+handleChangeXXX
+handlePressXXX
+handleSelectXXX
+```
+
+To me code quality is very important which translate to naming your functions clearly. Moving forward, I shall stick to naming them with present tense for action related functions.
+
+Reference:
+
+- https://nus-cs2103-ay2223s2.github.io/website/se-book-adapted/chapters/codeQuality.html#code-quality
+- https://github.com/kettanaito/naming-cheatsheet
